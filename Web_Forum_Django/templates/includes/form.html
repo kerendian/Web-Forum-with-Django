@@ -1,0 +1,34 @@
+
+<!-- here we are using the django-widget-tweaks -->
+{% load widget_tweaks %}
+
+{% for field in form %}
+  <div class="form-group">
+    {{ field.label_tag }}
+
+    {% if form.is_bound %}
+      {% if field.errors %}
+       <!-- The render_field tag is not part of Django; it lives inside the package we installed - widget-tweaks . 
+            To use it we have to pass a form field instance as the first parameter, 
+            and then after we can add arbitrary HTML attributes to complement it. 
+            It will be useful because then we can assign classes based on certain conditions. -->
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% render_field field class="form-control is-valid" %}
+      {% endif %}
+    {% else %}
+      {% render_field field class="form-control" %}
+    {% endif %}
+
+    {% if field.help_text %}
+      <small class="form-text text-muted">
+        {{ field.help_text }}
+      </small>
+    {% endif %}
+  </div>
+{% endfor %}

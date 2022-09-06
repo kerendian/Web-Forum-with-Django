@@ -9,21 +9,11 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <!-- Django protects all POST requests using a CSRF Token (Cross-Site Request Forgery Token). 
-        It’s a security measure to avoid external sites or applications to submit data to our application. 
-        Every time the application receives a POST, it will first look for the CSRF Token. 
-        If the request has no token, or the token is invalid, it will discard the posted data. -->
+  <form method="post" novalidate>
     {% csrf_token %}
-    <div class="form-group">
-      <label for="id_subject">Subject</label>
-      <!--  name of the HTML inputs. The name will be used to retrieve the data on the server side. -->
-      <input type="text" class="form-control" id="id_subject" name="subject">
-    </div>
-    <div class="form-group">
-      <label for="id_message">Message</label>
-      <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
-    </div>
+    <!-- the {% include %} is used to include HTML templates in another template. 
+      It’s a very useful way to reuse HTML components in a project. -->
+    {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Post</button>
   </form>
 {% endblock %}
