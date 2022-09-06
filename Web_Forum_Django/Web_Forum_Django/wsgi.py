@@ -1,5 +1,5 @@
 """
-WSGI config for django_tutorial project.
+WSGI config for Web_Forum_Django project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

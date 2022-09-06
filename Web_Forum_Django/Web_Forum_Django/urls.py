@@ -1,4 +1,4 @@
-"""django_tutorial URL Configuration
+"""Web_Forum_Django URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include, re_path
-
+# Notice how we are importing the views module from the accounts app in a different way
+# We are giving an alias because otherwise, it would clash with the boards’ views
+from accounts import views as accounts_views
+# We renamed it to auth_views to avoid clashing with the boards.views
+from django.contrib.auth import views as auth_views
 from boards import views #*******************************
 
 urlpatterns = [
     # re_path uses regexes like url.
     # Alternatively, you could switch to using path. path() does not use regexes, so you'll have to update your URL patterns if you switch to path.
     re_path(r'^$', views.home, name='home'),
+    re_path(r'^signup/$', accounts_views.signup, name='signup'),
+    re_path(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     re_path(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     re_path(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
     path('admin/', admin.site.urls),

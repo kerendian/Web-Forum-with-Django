@@ -11,7 +11,7 @@
 {% block content %}
   <form method="post" novalidate>
     {% csrf_token %}
-    <!-- the {% include %} is used to include HTML templates in another template. 
+    <!-- the include is used to include HTML templates in another template. 
       It’s a very useful way to reuse HTML components in a project. -->
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Post</button>
