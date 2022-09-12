@@ -10,6 +10,9 @@
           <h3 class="card-title">Log in</h3>
           <form method="post" novalidate>
             {% csrf_token %}
+            <!-- the next value - if we try to log in now, the application will direct us back to where we were. 
+            it will look like this in the url ?next=/boards/1/new/ if we where in /boards/1/new/ before trying to login-->
+            <input type="hidden" name="next" value="{{ next }}">
             {% include 'includes/form.html' %}
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </form>

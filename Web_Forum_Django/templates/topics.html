@@ -24,15 +24,11 @@
       </tr>
     </thead>
     <tbody>
-      <!-- to return all topics associated with a given board, we have to run board.topics.all() -->
-      <!-- To filter some data, we could do board.topics.filter(subject__contains='Hello') -->
-      {% for topic in board.topics.all %}
+      {% for topic in topics %}
         <tr>
-          <td>{{ topic.subject }}</td>
-          <!-- making use of a ForeignKey - We can pretty much access any property of the User model. 
-            If we wanted the user’s email, we could use topic.starter.email -->
+          <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
           <td>{{ topic.starter.username }}</td>
-          <td>0</td>
+          <td>{{ topic.replies }}</td>
           <td>0</td>
           <td>{{ topic.last_updated }}</td>
         </tr>
