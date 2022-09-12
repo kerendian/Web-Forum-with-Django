@@ -21,7 +21,9 @@ class Topic(models.Model):
     last_updated = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board, related_name='topics', on_delete=models.CASCADE)
     starter = models.ForeignKey(User, related_name='topics' ,on_delete=models.CASCADE)
-   
+    # Here we added a PositiveIntegerField. Since this field is going to store the number of page views, a negative page view wouldn’t make sense.
+    views = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.subject
     
